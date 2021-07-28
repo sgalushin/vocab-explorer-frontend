@@ -10,10 +10,10 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path={"/"}>
+          <Route exact path={["/", "/youtube"]}>
             <MainPage />
           </Route>
-          <Route path={"/youtube/:videoId"}>
+          <Route exact path={"/youtube/:videoId"}>
             <VideoPage />
           </Route>
         </Switch>
