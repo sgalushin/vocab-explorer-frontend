@@ -31,9 +31,14 @@ const youtubeVttToObject = (vttString: string): SubtitlesCollection => {
   return subtitles;
 };
 
+const removeInternalTags = (vttString: string): string => {
+  const tag1Re = new RegExp(`(<\\d\\d:\\d\\d:\\d\\d.\\d\\d\\d>)|<\\/c>|<c>`, "g");
+  return vttString.replaceAll(tag1Re, "");
+};
+
 const getSubtitle = async (lang: string, videoId: string) => {
   const res = await axios.get(process.env.REACT_APP_SUBTITLES_URL + "/" + videoId);
-  return youtubeVttToObject(res.data);
+  return youtubeVttToObject(removeInternalTags(res.data));
 };
 
 export default getSubtitle;
