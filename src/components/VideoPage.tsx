@@ -3,9 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import getSubtitle from "../apis/subtitles";
 import { useParams } from "react-router-dom";
 import { SubtitlesCollection } from "../SubtitlesCollection";
-import { Button, Dialog, DialogContent, DialogTitle, Grid } from "@material-ui/core";
+import { Button, Dialog, DialogContent, DialogTitle, Fab, Grid } from "@material-ui/core";
 import SubtitleLine from "./SubtitleLine";
 import "./VideoPage.css";
+import MenuIcon from "@material-ui/icons/Menu";
+import { Link } from "react-router-dom";
 
 const VideoPage = () => {
   let { videoId } = useParams<{ videoId: string }>();
@@ -28,8 +30,15 @@ const VideoPage = () => {
     playerRef.current?.getInternalPlayer().pauseVideo();
   };
 
-  const resumeVideo = () => {
-    playerRef.current?.getInternalPlayer().playVideo();
+  const resumeVideo = (moveBackwards = false) => {
+    const internalPlayer = playerRef.current?.getInternalPlayer();
+    if (!internalPlayer) {
+      return;
+    }
+    internalPlayer.playVideo();
+    if (moveBackwards) {
+      internalPlayer.seekTo(internalPlayer.getCurrentTime() - 1);
+    }
   };
 
   const onWordClick = (): void => {
@@ -50,21 +59,26 @@ const VideoPage = () => {
           width={"100%"}
         />
       </div>
-      <div className="subtitle-container">
+      <div className="subtitle-container" style={{ visibility: currentSubtitle.trim() ? "visible" : "hidden" }}>
         <SubtitleLine subtitleText={currentSubtitle} onWordClick={onWordClick} />
       </div>
-
+      <div className="menu-button-container">
+        <Link to="/">
+          <Fab color="primary" aria-label="add">
+            <MenuIcon />
+          </Fab>
+        </Link>
+      </div>
       <Dialog
         open={dictionaryIsOpen}
         onClose={() => {
           setDictionaryIsOpen(false);
-          resumeVideo();
+          resumeVideo(true);
         }}
         fullWidth
         maxWidth={"lg"}
       >
         <DialogTitle>Dictionary</DialogTitle>
-
         <DialogContent>
           <iframe
             src="https://www.linguee.com/english-german/search?source=auto&query=hallo"
