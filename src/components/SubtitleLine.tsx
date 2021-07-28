@@ -23,7 +23,7 @@ const SubtitleLine = ({ subtitleText, onWordClick }: { subtitleText: string; onW
     itemsToRender.push(<NonVocabItem text={subtitleText.slice(previousPosition)} />);
   }
 
-  return <h2>{itemsToRender}</h2>;
+  return <div>{itemsToRender}</div>;
 };
 
 const NonVocabItem = ({ text }: { text: string }) => {
