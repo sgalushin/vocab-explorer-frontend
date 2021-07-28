@@ -1,6 +1,6 @@
 import { Box, Button, TextField } from "@material-ui/core";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { KeyboardEventHandler, useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 
 import "./MainPage.css";
 
@@ -25,15 +25,29 @@ const extractVideoIdFromVideoOrUrl = (videoIdOrUrl: string): string => {
 const MainPage = () => {
   const [videoIdOrUrl, setVideoIdOrUrl] = useState("");
   const [goButtonDisabled, setGoButtonDisabled] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     setGoButtonDisabled(extractVideoIdFromVideoOrUrl(videoIdOrUrl).trim() == "");
   }, [videoIdOrUrl]);
 
+  const textFieldOnKeyPress: KeyboardEventHandler<HTMLDivElement> = (e) => {
+    if (e.key == "Enter") {
+      goToVideo();
+    }
+  };
+
+  const goToVideo = () => {
+    if (!goButtonDisabled) {
+      history.push(`/youtube/${extractVideoIdFromVideoOrUrl(videoIdOrUrl)}`);
+    }
+  };
+
   return (
     <div className="video-id-and-go-button-container">
       <div className="video-id-container">
         <TextField
+          onKeyPress={textFieldOnKeyPress}
           style={{ width: "60%" }}
           label="URL / Video ID"
           variant="outlined"
@@ -42,11 +56,9 @@ const MainPage = () => {
         />
       </div>
       <div className="go-button-container">
-        <Link to={`/youtube/${extractVideoIdFromVideoOrUrl(videoIdOrUrl)}`}>
-          <Button variant="contained" size="large" color="primary" disabled={goButtonDisabled}>
-            Go
-          </Button>
-        </Link>
+        <Button variant="contained" size="large" color="primary" disabled={goButtonDisabled} onClick={goToVideo}>
+          Go
+        </Button>
       </div>
     </div>
   );
