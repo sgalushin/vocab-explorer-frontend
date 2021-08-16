@@ -11,7 +11,7 @@ Currently, works only with videos in **German** and uses [Linguee](https://www.l
 
 ## Environment Variables
 
-The following environment variables must be set when running (`npm run`) or building (`npm run build`).
+The following environment variables must be set when running (`npm start`) or building (`npm run build`).
 
 
 
