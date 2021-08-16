@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const AboutPage = () => {
   return (
     <div>
@@ -11,6 +13,10 @@ const AboutPage = () => {
           www.flaticon.com
         </a>
       </div>
+
+      <Link to="/">
+        <h3>Return to main page</h3>
+      </Link>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { Button, TextField } from "@material-ui/core";
 import { KeyboardEventHandler, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import "./MainPage.css";
@@ -44,23 +45,28 @@ const MainPage = () => {
   };
 
   return (
-    <div className="video-id-and-go-button-container">
-      <div className="video-id-container">
-        <TextField
-          onKeyPress={textFieldOnKeyPress}
-          style={{ width: "60%" }}
-          label="URL / Video ID"
-          variant="outlined"
-          value={videoIdOrUrl}
-          onChange={(e) => setVideoIdOrUrl(e.target.value)}
-        />
+    <>
+      <div className="video-id-and-go-button-container">
+        <div className="video-id-container">
+          <TextField
+            onKeyPress={textFieldOnKeyPress}
+            style={{ width: "60%" }}
+            label="URL / Video ID"
+            variant="outlined"
+            value={videoIdOrUrl}
+            onChange={(e) => setVideoIdOrUrl(e.target.value)}
+          />
+        </div>
+        <div className="go-button-container">
+          <Button variant="contained" size="large" color="primary" disabled={goButtonDisabled} onClick={goToVideo}>
+            Go
+          </Button>
+        </div>
       </div>
-      <div className="go-button-container">
-        <Button variant="contained" size="large" color="primary" disabled={goButtonDisabled} onClick={goToVideo}>
-          Go
-        </Button>
+      <div className="footer">
+        <Link to="/about">About</Link>
       </div>
-    </div>
+    </>
   );
 };
 

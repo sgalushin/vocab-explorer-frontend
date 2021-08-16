@@ -4,6 +4,7 @@ import VideoPage from "./VideoPage";
 
 import "./App.css";
 import MainPage from "./MainPage";
+import AboutPage from "./AboutPage";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           </Route>
           <Route exact path={"/youtube/:videoId"}>
             <VideoPage />
+          </Route>
+          <Route exact path={"/about"}>
+            <AboutPage />
           </Route>
         </Switch>
       </Router>
