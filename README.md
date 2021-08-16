@@ -3,7 +3,7 @@
 A tool for language learners. Watch YouTube videos with clickable subtitles. A click pauses the video and shows a translation.
 Written in React, Typescript.
 
-Currently, works only with videos in **German** and uses [Linguee](https://www.linguee.com/) dictionary.
+Currently, the app works only with videos in **German** and uses [Linguee](https://www.linguee.com/) dictionary.
 
 ## Demo
 
