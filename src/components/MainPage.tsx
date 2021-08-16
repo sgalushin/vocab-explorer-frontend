@@ -1,6 +1,6 @@
-import { Box, Button, TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { KeyboardEventHandler, useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import "./MainPage.css";
 
@@ -28,11 +28,11 @@ const MainPage = () => {
   const history = useHistory();
 
   useEffect(() => {
-    setGoButtonDisabled(extractVideoIdFromVideoOrUrl(videoIdOrUrl).trim() == "");
+    setGoButtonDisabled(extractVideoIdFromVideoOrUrl(videoIdOrUrl).trim() === "");
   }, [videoIdOrUrl]);
 
   const textFieldOnKeyPress: KeyboardEventHandler<HTMLDivElement> = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       goToVideo();
     }
   };

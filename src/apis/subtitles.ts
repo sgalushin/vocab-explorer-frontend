@@ -13,7 +13,7 @@ const youtubeVttToObject = (vttString: string): SubtitlesCollection => {
   const timestampRe = new RegExp(`\\d\\d:\\d\\d:\\d\\d.\\d\\d\\d --> \\d\\d:\\d\\d:\\d\\d.\\d\\d\\d`);
   const subtitles = new SubtitlesCollection();
   for (const line of vttString.split(`\n`)) {
-    if (line.trim().length == 0) {
+    if (line.trim().length === 0) {
       continue;
     }
     if (timestampRe.test(line)) {

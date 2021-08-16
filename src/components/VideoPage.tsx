@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import getSubtitle from "../apis/subtitles";
 import { useParams } from "react-router-dom";
 import { SubtitlesCollection } from "../SubtitlesCollection";
-import { Button, Dialog, DialogContent, DialogTitle, Fab, Grid } from "@material-ui/core";
+import { Dialog, DialogContent, DialogTitle, Fab } from "@material-ui/core";
 import SubtitleLine from "./SubtitleLine";
 import "./VideoPage.css";
 import { Link } from "react-router-dom";
@@ -81,6 +81,7 @@ const VideoPage = () => {
         <DialogTitle>Dictionary</DialogTitle>
         <DialogContent>
           <iframe
+            title="Linguee dictionary (DE-EN)"
             src="https://www.linguee.com/english-german/search?source=auto&query=hallo"
             name="linguee-iframe"
             width={"100%"}
