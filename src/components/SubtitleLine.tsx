@@ -11,26 +11,26 @@ const SubtitleLine = ({ subtitleText, onWordClick }: { subtitleText: string; onW
   let previousPosition = 0;
   for (const wordPosition of wordsPositions) {
     if (wordPosition.start !== previousPosition) {
-      itemsToRender.push(<NonVocabItem text={subtitleText.slice(previousPosition, wordPosition.start)} />);
+      itemsToRender.push(<NonClickableWord text={subtitleText.slice(previousPosition, wordPosition.start)} />);
       previousPosition = wordPosition.start!;
     }
     itemsToRender.push(
-      <VocabItem text={subtitleText.slice(wordPosition.start, wordPosition.end)} onClick={onWordClick} />
+      <ClickableWord text={subtitleText.slice(wordPosition.start, wordPosition.end)} onClick={onWordClick} />
     );
     previousPosition = wordPosition.end;
   }
   if (previousPosition !== subtitleText.length) {
-    itemsToRender.push(<NonVocabItem text={subtitleText.slice(previousPosition)} />);
+    itemsToRender.push(<NonClickableWord text={subtitleText.slice(previousPosition)} />);
   }
 
   return <div>{itemsToRender}</div>;
 };
 
-const NonVocabItem = ({ text }: { text: string }) => {
+const NonClickableWord = ({ text }: { text: string }) => {
   return <span>{text}</span>;
 };
 
-const VocabItem = ({ text, onClick }: { text: string; onClick: () => void }) => {
+const ClickableWord = ({ text, onClick }: { text: string; onClick: () => void }) => {
   return (
     <Link
       onClick={onClick}

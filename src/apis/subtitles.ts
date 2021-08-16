@@ -1,6 +1,10 @@
 import axios from "axios";
 import { SubtitlesCollection } from "../SubtitlesCollection";
 
+/**
+ * Converts subtitles in VTT to SubtitlesCollection class.
+ * Conversion is specific for subtitles, downloaded from YouTube (which do not always follow the VTT standard).
+ */
 const youtubeVttToObject = (vttString: string): SubtitlesCollection => {
   /**
    * Removes internal tags for highlighting a specific word in a subtitle (retaining text inside tags).
@@ -13,7 +17,12 @@ const youtubeVttToObject = (vttString: string): SubtitlesCollection => {
     return vttString.replaceAll(tag1Re, "");
   };
 
-  const timestampToMsec = (timestamp: string): number => {
+  /**
+   * Converts a timestamp into milliseconds
+   * @param timestamp - a string with a timestamp
+   * @returns number - milliseconds (always an integer)
+   */
+  const timestampToMs = (timestamp: string): number => {
     const hours = parseInt(timestamp.slice(0, 2));
     const minutes = parseInt(timestamp.slice(3, 5));
     const seconds = parseInt(timestamp.slice(6, 8));
@@ -30,8 +39,8 @@ const youtubeVttToObject = (vttString: string): SubtitlesCollection => {
     }
     if (timestampRe.test(line)) {
       subtitles.items.push({
-        start: timestampToMsec(line.slice(0, 12)),
-        end: timestampToMsec(line.slice(17, 29)),
+        start: timestampToMs(line.slice(0, 12)),
+        end: timestampToMs(line.slice(17, 29)),
         text: "",
       });
     } else if (subtitles.items.length > 0) {
@@ -43,7 +52,12 @@ const youtubeVttToObject = (vttString: string): SubtitlesCollection => {
   return subtitles;
 };
 
-const getSubtitle = async (lang: string, videoId: string) => {
+/**
+ * Downloads subtitles for a specific language and video and returns them as a SubtitleCollection class.
+ * @param lang - ISO 639-1:2002 language code
+ * @param videoId - Youtube Video ID (for example "hgg7lwi_xzc")
+ */
+const getSubtitle = async (lang: string, videoId: string): Promise<SubtitlesCollection> => {
   const res = await axios.get(process.env.REACT_APP_SUBTITLES_URL + "/" + videoId);
   return youtubeVttToObject(res.data);
 };
