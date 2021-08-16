@@ -6,8 +6,8 @@ import { SubtitlesCollection } from "../SubtitlesCollection";
 import { Button, Dialog, DialogContent, DialogTitle, Fab, Grid } from "@material-ui/core";
 import SubtitleLine from "./SubtitleLine";
 import "./VideoPage.css";
-import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
+import HomeIcon from "@material-ui/icons/Home";
 
 const VideoPage = () => {
   let { videoId } = useParams<{ videoId: string }>();
@@ -65,7 +65,7 @@ const VideoPage = () => {
       <div className="menu-button-container">
         <Link to="/">
           <Fab color="primary" aria-label="add">
-            <MenuIcon />
+            <HomeIcon />
           </Fab>
         </Link>
       </div>
