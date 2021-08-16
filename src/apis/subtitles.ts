@@ -57,9 +57,9 @@ const youtubeVttToObject = (vttString: string): SubtitlesCollection => {
  * @param lang - ISO 639-1:2002 language code
  * @param videoId - Youtube Video ID (for example "hgg7lwi_xzc")
  */
-const getSubtitle = async (lang: string, videoId: string): Promise<SubtitlesCollection> => {
-  const res = await axios.get(process.env.REACT_APP_SUBTITLES_URL + "/" + videoId);
+const fetchSubtitles = async (lang: string, videoId: string): Promise<SubtitlesCollection> => {
+  const res = await axios.get(`${process.env.REACT_APP_SUBTITLES_URL}/${lang}/${videoId}`);
   return youtubeVttToObject(res.data);
 };
 
-export default getSubtitle;
+export default fetchSubtitles;

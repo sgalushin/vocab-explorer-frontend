@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Dialog, DialogContent, DialogTitle, Fab } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import SubtitleLine from "../components/SubtitleLine";
-import getSubtitle from "../apis/subtitles";
+import fetchSubtitles from "../apis/subtitles";
 import { SubtitlesCollection } from "../SubtitlesCollection";
 import "./VideoPage.css";
 
@@ -17,7 +17,7 @@ const VideoPage = () => {
 
   useEffect(() => {
     (async () => {
-      setSubtitles(await getSubtitle("de", videoId));
+      setSubtitles(await fetchSubtitles("de", videoId));
     })();
   }, [videoId]);
 

@@ -1,6 +1,11 @@
 import { Link } from "@material-ui/core";
 
+/**
+ * Presents text as a line of clickable words.
+ * Other symbols (eg. punctuation) are preserved and are non-clickable.
+ */
 const SubtitleLine = ({ subtitleText, onWordClick }: { subtitleText: string; onWordClick: () => void }) => {
+  // support for german words
   const splitIntoWordsRe: RegExp = new RegExp(`[A-Za-zÄÖÜẞäöüß]+|[A-Za-zÄÖÜẞäöüß]`, "g");
 
   const wordsPositions = Array.from(subtitleText.matchAll(splitIntoWordsRe))
@@ -11,7 +16,7 @@ const SubtitleLine = ({ subtitleText, onWordClick }: { subtitleText: string; onW
   let previousPosition = 0;
   for (const wordPosition of wordsPositions) {
     if (wordPosition.start !== previousPosition) {
-      itemsToRender.push(<NonClickableWord text={subtitleText.slice(previousPosition, wordPosition.start)} />);
+      itemsToRender.push(<NonClickableItem text={subtitleText.slice(previousPosition, wordPosition.start)} />);
       previousPosition = wordPosition.start!;
     }
     itemsToRender.push(
@@ -20,13 +25,13 @@ const SubtitleLine = ({ subtitleText, onWordClick }: { subtitleText: string; onW
     previousPosition = wordPosition.end;
   }
   if (previousPosition !== subtitleText.length) {
-    itemsToRender.push(<NonClickableWord text={subtitleText.slice(previousPosition)} />);
+    itemsToRender.push(<NonClickableItem text={subtitleText.slice(previousPosition)} />);
   }
 
   return <div>{itemsToRender}</div>;
 };
 
-const NonClickableWord = ({ text }: { text: string }) => {
+const NonClickableItem = ({ text }: { text: string }) => {
   return <span>{text}</span>;
 };
 

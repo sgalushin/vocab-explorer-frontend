@@ -4,7 +4,7 @@ const AboutPage = () => {
   return (
     <div>
       <div>
-        Icons made by{" "}
+        Icon made by{" "}
         <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">
           Smashicons
         </a>{" "}
