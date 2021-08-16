@@ -1,13 +1,12 @@
 import ReactPlayer from "react-player";
 import React, { useEffect, useRef, useState } from "react";
-import getSubtitle from "../apis/subtitles";
-import { useParams } from "react-router-dom";
-import { SubtitlesCollection } from "../SubtitlesCollection";
+import { Link, useParams } from "react-router-dom";
 import { Dialog, DialogContent, DialogTitle, Fab } from "@material-ui/core";
-import SubtitleLine from "./SubtitleLine";
-import "./VideoPage.css";
-import { Link } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
+import SubtitleLine from "../components/SubtitleLine";
+import getSubtitle from "../apis/subtitles";
+import { SubtitlesCollection } from "../SubtitlesCollection";
+import "./VideoPage.css";
 
 const VideoPage = () => {
   let { videoId } = useParams<{ videoId: string }>();

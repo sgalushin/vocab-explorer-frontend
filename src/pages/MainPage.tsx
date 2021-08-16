@@ -1,8 +1,6 @@
 import { Button, TextField } from "@material-ui/core";
 import { KeyboardEventHandler, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-
+import { Link, useHistory } from "react-router-dom";
 import "./MainPage.css";
 
 const extractVideoIdFromVideoOrUrl = (videoIdOrUrl: string): string => {

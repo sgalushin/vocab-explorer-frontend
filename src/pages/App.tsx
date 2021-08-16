@@ -1,10 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import VideoPage from "./VideoPage";
-
-import "./App.css";
 import MainPage from "./MainPage";
 import AboutPage from "./AboutPage";
+import "./App.css";
 
 function App() {
   return (

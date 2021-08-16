@@ -4,18 +4,15 @@
 
 .video-id-container {
     padding: 10px;
-
 }
 
 .go-button-container {
     padding: 10px;
-
 }
 
 .footer {
     position: fixed;
     bottom: 0;
     right: 1rem;
-
     text-align: center;
 }

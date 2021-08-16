@@ -2,6 +2,17 @@ import axios from "axios";
 import { SubtitlesCollection } from "../SubtitlesCollection";
 
 const youtubeVttToObject = (vttString: string): SubtitlesCollection => {
+  /**
+   * Removes internal tags for highlighting a specific word in a subtitle (retaining text inside tags).
+   * Example:
+   *   Input: "<c>das<00:00:00.240><c> hier</c><00:00:00.390><c> ist</c>"
+   *   Output: "das hier ist"
+   */
+  const removeInternalTags = (vttString: string): string => {
+    const tag1Re = new RegExp(`(<\\d\\d:\\d\\d:\\d\\d.\\d\\d\\d>)|<\\/c>|<c>`, "g");
+    return vttString.replaceAll(tag1Re, "");
+  };
+
   const timestampToMsec = (timestamp: string): number => {
     const hours = parseInt(timestamp.slice(0, 2));
     const minutes = parseInt(timestamp.slice(3, 5));
@@ -12,7 +23,8 @@ const youtubeVttToObject = (vttString: string): SubtitlesCollection => {
 
   const timestampRe = new RegExp(`\\d\\d:\\d\\d:\\d\\d.\\d\\d\\d --> \\d\\d:\\d\\d:\\d\\d.\\d\\d\\d`);
   const subtitles = new SubtitlesCollection();
-  for (const line of vttString.split(`\n`)) {
+  const vttStringWithoutInternalTags = removeInternalTags(vttString);
+  for (const line of vttStringWithoutInternalTags.split(`\n`)) {
     if (line.trim().length === 0) {
       continue;
     }
@@ -31,14 +43,9 @@ const youtubeVttToObject = (vttString: string): SubtitlesCollection => {
   return subtitles;
 };
 
-const removeInternalTags = (vttString: string): string => {
-  const tag1Re = new RegExp(`(<\\d\\d:\\d\\d:\\d\\d.\\d\\d\\d>)|<\\/c>|<c>`, "g");
-  return vttString.replaceAll(tag1Re, "");
-};
-
 const getSubtitle = async (lang: string, videoId: string) => {
   const res = await axios.get(process.env.REACT_APP_SUBTITLES_URL + "/" + videoId);
-  return youtubeVttToObject(removeInternalTags(res.data));
+  return youtubeVttToObject(res.data);
 };
 
 export default getSubtitle;

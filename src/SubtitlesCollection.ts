@@ -13,7 +13,7 @@ export class SubtitlesCollection {
   /**
    * Returns a string that should be displayed on screen for a specific millisecond of a video.
    * If there are multiple subtitles for this time (ie. some timestamps are overlapping), the function returns the
-   * first subtitle string.
+   * first one.
    * @param ms - A positive integer representing elapsed milliseconds.
    */
   getText(ms: number): string | undefined {
