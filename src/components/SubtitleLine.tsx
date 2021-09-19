@@ -1,4 +1,5 @@
 import { Link } from "@material-ui/core";
+import supportedLanguages from "../supportedLanguages";
 
 /**
  * Presents text as a line of clickable words.
@@ -40,7 +41,7 @@ const ClickableWord = ({ text, onClick }: { text: string; onClick: () => void })
     <Link
       onClick={onClick}
       target="linguee-iframe"
-      href={`https://www.linguee.com/english-german/search?source=german&query=${text.trim()}`}
+      href={`https://www.linguee.com/english-${supportedLanguages[process.env.REACT_APP_LANGUAGE!]}/search?query=${text.trim()}`}
     >
       <span style={{ color: "brown" }}>{text}</span>
     </Link>

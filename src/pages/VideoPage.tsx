@@ -17,7 +17,7 @@ const VideoPage = () => {
 
   useEffect(() => {
     (async () => {
-      setSubtitles(await fetchSubtitles("de", videoId));
+      setSubtitles(await fetchSubtitles(process.env.REACT_APP_LANGUAGE!, videoId));
     })();
   }, [videoId]);
 
@@ -80,8 +80,8 @@ const VideoPage = () => {
         <DialogTitle>Dictionary</DialogTitle>
         <DialogContent>
           <iframe
-            title="Linguee dictionary (DE-EN)"
-            src="https://www.linguee.com/english-german/search?source=auto&query=hallo"
+            title="Linguee dictionary"
+            src="https://www.linguee.com/english-german/search?query=test"
             name="linguee-iframe"
             width={"100%"}
             height={"800px"}

@@ -18,7 +18,7 @@ The following environment variables must be set when running (`npm start`) or bu
 | Variable Name                      | Example                                                      | Description |
 |------------------------------------|--------------------------------------------------------------|-------------|
 | `REACT_APP_SUBTITLES_URL`           | https://36czxa52an.execute-api.eu-west-2.amazonaws.com/Prod/ | HTTP endpoint that returns subtitles in VTT format. See [youtube-subtitle-downloader-in-lambda](https://github.com/sgalushin/youtube-subtitle-downloader-in-lambda). |
-
+| `REACT_APP_LANGUAGE`                | nl                         | Language code. Currently supported: `nl`, `de`.
 
 ## License
 
