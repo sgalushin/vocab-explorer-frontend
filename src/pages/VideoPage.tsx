@@ -69,7 +69,7 @@ const VideoPage = () => {
         {currentSubtitleEn}
       </div>
       <div className="menu-button-container">
-        <Link to="/">
+        <Link className="menu-button" to="/">
           <Fab color="primary" aria-label="add">
             <HomeIcon />
           </Fab>

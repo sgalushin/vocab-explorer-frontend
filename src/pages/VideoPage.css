@@ -29,7 +29,6 @@
 
 .subtitle-container-en {
     position: absolute;
-    z-index: 100;
     top: 5%;
     left: 0;
     font-family: Arial;
@@ -45,4 +44,13 @@
 .menu-button-container {
     text-align: right;
     margin-top: 3rem;
+    z-index: 150;
+}
+
+.menu-button {
+    opacity: 40%;
+}
+
+.menu-button:hover {
+    opacity: 100%;
 }
