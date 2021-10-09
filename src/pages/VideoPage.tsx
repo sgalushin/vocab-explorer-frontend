@@ -12,17 +12,21 @@ const VideoPage = () => {
   let { videoId } = useParams<{ videoId: string }>();
   const playerRef = useRef<ReactPlayer>(null);
   const [subtitles, setSubtitles] = useState<SubtitlesCollection>();
+  const [subtitlesEn, setSubtitlesEn] = useState<SubtitlesCollection>();
   const [currentSubtitle, setCurrentSubtitle] = useState("");
+  const [currentSubtitleEn, setCurrentSubtitleEn] = useState("");
   const [dictionaryIsOpen, setDictionaryIsOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
       setSubtitles(await fetchSubtitles(process.env.REACT_APP_LANGUAGE!, videoId));
+      setSubtitlesEn(await fetchSubtitles("en", videoId));
     })();
   }, [videoId]);
 
   const onPlayerProgress = ({ playedSeconds }: { playedSeconds: number }) => {
     setCurrentSubtitle(subtitles?.getText(playedSeconds * 1000) ?? "");
+    setCurrentSubtitleEn(subtitlesEn?.getText(playedSeconds * 1000) ?? "");
   };
 
   const pauseVideo = () => {
@@ -60,6 +64,9 @@ const VideoPage = () => {
       </div>
       <div className="subtitle-container" style={{ visibility: currentSubtitle.trim() ? "visible" : "hidden" }}>
         <SubtitleLine subtitleText={currentSubtitle} onWordClick={onWordClick} />
+      </div>
+      <div className="subtitle-container-en">
+        {currentSubtitleEn}
       </div>
       <div className="menu-button-container">
         <Link to="/">
